@@ -2,6 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+// REGISTER
 const register = async (req, res) => {
   const { name, email, password, role } = req.body;
 
@@ -24,6 +25,7 @@ const register = async (req, res) => {
   }
 };
 
+// LOGIN
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -46,12 +48,13 @@ const login = async (req, res) => {
   }
 };
 
+// FETCH WORKERS BY TYPE
 const getWorkersByType = async (req, res) => {
   try {
     const type = req.params.type.toLowerCase();
     const workers = await User.find({
       role: "worker",
-      specialization: type
+      specialization: type,
     }).select("-password");
 
     res.status(200).json(workers);
@@ -60,5 +63,4 @@ const getWorkersByType = async (req, res) => {
   }
 };
 
-// ✅ Use one single export
 module.exports = { register, login, getWorkersByType };
