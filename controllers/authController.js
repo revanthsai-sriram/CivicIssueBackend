@@ -1,4 +1,3 @@
-// controllers/authController.js
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -47,10 +46,7 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
-
-
-exports.getWorkersByType = async (req, res) => {
+const getWorkersByType = async (req, res) => {
   try {
     const type = req.params.type.toLowerCase();
     const workers = await User.find({
@@ -63,3 +59,6 @@ exports.getWorkersByType = async (req, res) => {
     res.status(500).json({ message: "Error fetching workers", error: error.message });
   }
 };
+
+// ✅ Use one single export
+module.exports = { register, login, getWorkersByType };
