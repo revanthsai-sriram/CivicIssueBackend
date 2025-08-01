@@ -49,7 +49,6 @@ const login = async (req, res) => {
 
 module.exports = { register, login };
 
-const User = require("../models/User"); // or "../models/userModel" depending on your filename
 
 exports.getWorkersByType = async (req, res) => {
   try {
